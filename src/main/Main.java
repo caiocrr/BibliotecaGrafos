@@ -47,7 +47,7 @@ public class Main {
 
 
 //        String fileGrafo = "E:\\materiais\\16.2\\teoria_dos_grafos\\trabalho 3\\grafos\\points-5.txt";
-          String fileGrafo = "E:\\materiais\\16.2\\teoria_dos_grafos\\trabalho 3\\posicoes\\points-1000.txt";
+          String fileGrafo = "E:\\materiais\\16.2\\teoria_dos_grafos\\trabalho 3\\posicoes\\points-10000.txt";
 
 
 

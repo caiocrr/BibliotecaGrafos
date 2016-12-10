@@ -29,8 +29,9 @@ public class Manager {
         //Pegar subgrafo: vertices com grau impar e criar um determinar o perfect matching entre eles
         ArrayList<Integer> oddDegrees = this.getOddVertex(grafoMST); //O(n)
 
+        float[][] matrizAdj = grafo.representacao.getMatrix();
         //Pegar PerfectMatch com minimum weight
-        int[][] match = this.getMaxMatchMinimumCost(oddDegrees, grafo.representacao.getMatrix()); //O(n^3)
+        int[][] match = this.getMaxMatchMinimumCost(oddDegrees, matrizAdj); //O(n^3)
 //
 //        for (int i = 0; i < match.length; i++) {
 //            System.out.println(Arrays.toString(match[i]));
@@ -41,6 +42,22 @@ public class Manager {
         Node[] multiGrafo = multiGrafo(match, grafoMST); //O(n)
 
         int caminho[] = caminhoEuleriano(multiGrafo);
+
+        double pathLength = 0;
+        for (int i = 0; i < caminho.length - 1; i++) {
+            pathLength += matrizAdj[caminho[i] - 1][caminho[i + 1] - 1];
+        }
+      
+        Two_OPT two_opt1 = new Two_OPT();
+        double tmp = two_opt1.twoOpt(matrizAdj, caminho, pathLength, grafo.vertices);
+        caminho = two_opt1.get_path();
+        
+                
+        while (tmp < pathLength) {
+            pathLength = tmp;
+            tmp = two_opt1.twoOpt(matrizAdj, caminho, pathLength, grafo.vertices);
+            caminho = two_opt1.get_path();
+        }
 
         return caminho;
 
@@ -172,7 +189,6 @@ public class Manager {
             }
             Arrays.sort(arestas[i]);
         }
-
 
         int maxIt = qtdOdd;
         float countGlobal = Float.MAX_VALUE;
