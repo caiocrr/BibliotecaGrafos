@@ -18,6 +18,7 @@ interface Representacao {
 //    }
 
     public ArrayList<Vizinho> getVizinhos(int vertice);
-
+    
+    public float[][] getMatrix();
 
 }

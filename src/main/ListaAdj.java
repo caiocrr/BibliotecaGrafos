@@ -32,6 +32,12 @@ public class ListaAdj implements  Representacao {
         }
         return filhos;
     }
+    
+    @Override
+     public float[][] getMatrix(){
+         return new float[1][1];
+     }
+
 
 
     public void representar(int vertices, ArrayList<Aresta> arestas) {

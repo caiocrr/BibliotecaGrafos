@@ -25,12 +25,15 @@ public class Grafo {
     public ArrayList<Boolean> marcacao;
 
     public float dist[];
+    
+    public int[] vertexMapping;
+    public int[] vertexMappingReverse;
 
     public int[] grauVertice;
     public int[] grau;
     public int grauMax = 0;
     
-    private Representacao representacao;
+    public Representacao representacao;
     
     public Integer vertices;
     public ArrayList<Aresta> arestas;
@@ -65,6 +68,7 @@ public class Grafo {
         return representacao.getVizinhos(verticeTemp);
     }
 
+
     public void startArrays(){
         pai = new ArrayList();
         nivel = new ArrayList<>();
@@ -77,7 +81,7 @@ public class Grafo {
         }
     }
 
-    public void gerarArquivo(String path) {
+    public void gerarArquivoInfo(String path) {
         try {
             FileWriter arq = new FileWriter(path);
             PrintWriter gravarArq = new PrintWriter(arq);
@@ -101,6 +105,23 @@ public class Grafo {
 
     }
 
+    public void gerarArquivoGrafo(String path) {
+        try {
+            FileWriter arq = new FileWriter(path);
+            PrintWriter gravarArq = new PrintWriter(arq);
+
+            gravarArq.printf(this.vertices + " \r\n");
+
+            for (int i = 0; i < this.arestas.size(); i++) {
+                gravarArq.printf(this.arestas.get(i).vertice1 + " " + this.arestas.get(i).vertice2 + " " + this.arestas.get(i).peso + "\r\n");
+            }
+
+            arq.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Grafo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
 
 
